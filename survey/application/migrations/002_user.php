@@ -17,7 +17,7 @@ SQL;
         $salt = config_item('salt');
         for($i = 0; $i < 10; $i++) {
             $username = 'user'.$i;
-            $hash = sha1($salt . $username . $i);
+            $hash = sha1($salt . 'o0o' . $username);
             $sql[] = <<< SQL
 insert into `user`(username, password) VALUES ('$username', '$hash');
 SQL;
