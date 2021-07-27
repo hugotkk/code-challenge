@@ -21,15 +21,22 @@ class Main extends Projectbase {
                 if(!$result['error']) {
                     $survey = $this->survey->buildSubmit($postData);
                     $this->survey->saveSubmit($survey);
-                    $this->survey->saveSubmit($survey);
-                    $this->title[] = 'Thank you page';
-                    $view = 'thankyou';
+                    $this->session->set_userdata('redirect_form', true);
+                    $this->session->mark_as_flash('redirect_form');
+                    $this->load->helper('url');
+                    header('Location: /', true, 303);
+                    die;
                 } else {
                     $data['errors'] = $result['message'];
                 }
             } else {
                 $data['errors'] = $result['message'];
             }
+        }
+        $redirect_form = $this->session->flashdata('redirect_form');
+        if($redirect_form) {
+            $this->title[] = 'Thank you page';
+            $view = 'thankyou';
         }
         $this->load->view('main/' . $view, $this->setViewData($data));
     }
