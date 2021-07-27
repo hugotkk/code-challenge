@@ -62,7 +62,7 @@ docker-compose up -d
 - Browse the web application on `http://localhost:3000`
 - Import DB
 ```
-docker exec -it code-challenge_mariadb_1 mysql<-uroot -proot bitnami_app < db.sql
+docker exec -it code-challenge_mariadb_1 mysql -uroot -proot bitnami_app < db.sql
 ```
 - Run migrate (if you skip mport db and want a clean installation)
 ```
