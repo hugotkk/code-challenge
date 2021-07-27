@@ -143,5 +143,22 @@ class Survey extends CI_Model {
         return true;
     }
 
+    public function getFullLogs($page, $item_per_page) {
+        $offset = ($page - 1) * $item_per_page;
+        $query = $this->db->query("select * from survey order by datetime desc limit ?, ?", [$offset, $item_per_page]);
+        $result = [];
+        $result['data'] = $query->result_array();
+        foreach($result['data'] as $idx => $row) {
+            $sub_query = $this->db->query("select * from survey_colors where survey_id = ?", [$row['id']]);
+            $colors = $sub_query->result_array();
+            foreach($colors as $color) {
+                $result['data'][$idx]['colors'][] = $color['color'];
+            }
+        }
+        $query = $this->db->query("select count(1) as count from survey order by datetime desc");
+        $result['total'] = $query->result_array()[0]['count'];
+        return $result;
+    }
+
 
 }

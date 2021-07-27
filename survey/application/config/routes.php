@@ -60,7 +60,7 @@ $route['report/login'] = 'report/login';
 $route['report/logout'] = 'report/logout';
 $route['report/bar-graph'] = "report/bar_graph";
 $route['report/entries-per-color'] = "report/entries_per_color";
-$route['report/full-logs'] = "report/full_logs";
+$route['report/full-logs(?:/page/(\d+))?'] = "report/full_logs/$1";
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

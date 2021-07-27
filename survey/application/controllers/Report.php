@@ -52,8 +52,31 @@ class Report extends Projectbase {
         $this->loadView('report/entries_per_color', $this->setViewData($data));
     }
 
-    public function full_logs() {
+    public function full_logs($page = 1) {
         $data = [];
+        $this->load->model('survey');
+        if(!$page) {
+            $page = 1;
+        }
+        if(!preg_match('#\d+#', $page)) {
+            show_404();
+        }
+        $item_per_page = 100;
+        $result = $this->survey->getFullLogs($page, $item_per_page);
+        $data['page'] = $page;
+        $data['rows'] = $result['data'];
+        if(!$data['rows'] && $page != 1) {
+            show_404();
+        }
+
+        $this->load->library('pagination');
+        $config['base_url'] = '/report/full-logs/page';
+        $config['total_rows'] = $result['total'];
+        $config['use_page_numbers'] = TRUE;
+        $config['per_page'] = $item_per_page;
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+
         $this->loadView('report/full_logs', $this->setViewData($data));
     }
 
