@@ -10,7 +10,7 @@ CREATE TABLE `survey` (
 `email` varchar(199) NULL,
 `ip` varchar(199) NULL,
 `user_agent` varchar(199) NULL,
-`daetime` datetime NOT NULL
+`datetime` datetime NOT NULL
 ) ENGINE='InnoDB' COLLATE 'utf8mb4_unicode_ci';
 SQL;
         $sql[] = <<< SQL
