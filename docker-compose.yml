@@ -11,6 +11,13 @@ services:
     depends_on:
       - mariadb
   mariadb:
-    image: docker.io/bitnami/mariadb:10.3
+    image: mariadb:10.3
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=bitnami_app
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=bn_app
+      - MYSQL_PASSWORD=9rLCqkCf5Z
+    volumes:
+      - "./data/db/mysql:/var/lib/mysql"
+
