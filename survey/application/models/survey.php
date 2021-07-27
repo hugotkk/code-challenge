@@ -134,5 +134,14 @@ class Survey extends CI_Model {
         $this->db->trans_complete();
     }
 
+    public function isValid() {
+        $query = $this->db->query("select count(1) as count from survey");
+        $result = $query->result_array();
+        if($result) {
+            return $result[0]['count'] <= config_item('max_entry');
+        }
+        return true;
+    }
+
 
 }
