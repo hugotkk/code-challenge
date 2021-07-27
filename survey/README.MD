@@ -59,20 +59,20 @@ Header always set Referrer-Policy "no-referrer-when-downgrade"
 ```
 docker-compose up -d
 ```
-- Browse the web application on `http://localhost:3000`
+- Browse the web application on `http://localhost:8000`
 - Import DB
 ```
 docker exec -it code-challenge_mariadb_1 mysql -uroot -proot bitnami_app < db.sql
 ```
 - Run migrate (if you skip mport db and want a clean installation)
 ```
-http://localhost:3000/migrate
+http://localhost:8000/migrate
 ```
 - Change environment to production
 
 # Entry Points
-survey: https://localhost:3000/
-online report: https://localhost:3000/report
+survey: https://localhost:8000/
+online report: https://localhost:8000/report
 
 # Login Accounts (random generated 10 accounts)
 user0 / o0ouser0
