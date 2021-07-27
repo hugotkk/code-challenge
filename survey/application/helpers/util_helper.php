@@ -34,3 +34,19 @@ if (!function_exists('user_agent')) {
         return $agent;
     }
 }
+
+if (!function_exists('is_valid_recaptcha')) {
+    function is_valid_recaptcha($postData) {
+        $secret = config_item('recaptcha_private_key');
+        $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+        $resp = $recaptcha->verify(may_blank($postData['g-recaptcha-response']));
+        if ($resp->isSuccess()) {
+            $result['error'] = false;
+            $result['message'] = '';
+        } else {
+            $result['error'] = true;
+            $result['message'] = 'Failed to pass the reCAPTCHA: '. implode('<br/>', $resp->getErrorCodes());
+        }
+        return $result;
+    }
+}

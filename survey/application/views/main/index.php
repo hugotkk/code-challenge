@@ -31,8 +31,19 @@
                 <?php endforeach ?>
             </div>
             <div class="row">
+                <div class="g-recaptcha form-field"></div>
                 <button type="submit">Submit</button>
             </div>
         </form>
+    <script type="text/javascript">
+    var onloadCallback = function() {
+        var captchaContainer = document.querySelector('.g-recaptcha');
+        grecaptcha.render(captchaContainer, {
+        'sitekey' : '<?php echo $recaptcha_public_key; ?>'
+        });
+        document.querySelector('button[type="submit"]').disabled = false;
+    };
+    </script>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en&onload=onloadCallback&render=explicit" async defer></script>
     </body>
 </html>

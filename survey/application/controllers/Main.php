@@ -13,13 +13,20 @@ class Main extends Projectbase {
         $postData = $this->input->post();
         $data['post_data'] = $this->survey->getPostData($postData);
         $data['colors'] = $this->survey->getColors();
+        $data['recaptcha_public_key'] = config_item('recaptcha_public_key');
         if (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {
-            $result = $this->survey->isValidSubmit();
+            $result = is_valid_recaptcha($postData);
             if(!$result['error']) {
-                $survey = $this->survey->buildSubmit($postData);
-                $this->survey->saveSubmit($survey);
-                $this->title[] = 'Thank you page';
-                $view = 'thankyou';
+                $result = $this->survey->isValidSubmit();
+                if(!$result['error']) {
+                    $survey = $this->survey->buildSubmit($postData);
+                    $this->survey->saveSubmit($survey);
+                    $this->survey->saveSubmit($survey);
+                    $this->title[] = 'Thank you page';
+                    $view = 'thankyou';
+                } else {
+                    $data['errors'] = $result['message'];
+                }
             } else {
                 $data['errors'] = $result['message'];
             }
