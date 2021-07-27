@@ -7,6 +7,7 @@ class Projectbase extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->database();
         $this->title[] = 'DF Coding Challenge';
     }
 
