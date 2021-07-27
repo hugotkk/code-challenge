@@ -109,12 +109,27 @@ class Survey extends CI_Model {
         $data['name'] = may_blank($postData['name']);
         $data['email'] = may_blank($postData['email']);
         $data['colors'] = may_blank($postData['colors'], []);
-        $data['ip'] = may_blank($this->input->ip_address());
-        $this->load->library('user_agent');
-        $data['user_agent'] = may_blank($this->agent->browser(), '');
+        $ip = $this->input->ip_address();
+        $data['ip'] = may_blank($ip);
+        $user_agent = user_agent();
+        $data['user_agent'] = may_blank($user_agent, '');
+        return $data;
     }
 
-    public function saveSubmit($postData) {
+    public function saveSubmit($data) {
+        $this->db->query("insert into survey (name, email, ip, user_agent) VALUES (?, ?, ?, ?)", [
+            $data['name'],
+            $data['email'],
+            $data['ip'],
+            $data['user_agent'],
+        ]);
+        $survey_id = $this->db->insert_id();
+        foreach($data['colors'] as $color) {
+            $this->db->query("insert into survey_colors (survey_id, color) VALUES (?, ?)", [
+                $survey_id,
+                $color,
+            ]);
+        }
     }
 
 

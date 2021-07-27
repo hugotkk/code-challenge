@@ -16,7 +16,8 @@ class Main extends Projectbase {
         if (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {
             $result = $this->survey->isValidSubmit();
             if(!$result['error']) {
-                $this->survey->saveSubmit($postData);
+                $survey = $this->survey->buildSubmit($postData);
+                $this->survey->saveSubmit($survey);
                 $this->title[] = 'Thank you page';
                 $view = 'thankyou';
             } else {
