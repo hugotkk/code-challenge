@@ -113,16 +113,18 @@ class Survey extends CI_Model {
         $data['ip'] = may_blank($ip);
         $user_agent = user_agent();
         $data['user_agent'] = may_blank($user_agent, '');
+        $data['datetime'] = date('Y-m-d H:i:00');
         return $data;
     }
 
     public function saveSubmit($data) {
         $this->db->trans_start();
-        $this->db->query("insert into survey (name, email, ip, user_agent) VALUES (?, ?, ?, ?)", [
+        $this->db->query("insert into survey (name, email, ip, user_agent, datetime) VALUES (?, ?, ?, ?, ?)", [
             $data['name'],
             $data['email'],
             $data['ip'],
             $data['user_agent'],
+            $data['datetime'],
         ]);
         $survey_id = $this->db->insert_id();
         foreach($data['colors'] as $color) {
