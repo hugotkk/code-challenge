@@ -43,7 +43,7 @@ class Main extends Projectbase {
             $this->title[] = 'Thank you page';
             $view = 'thankyou';
         }
-        $this->load->view('main/' . $view, $this->setViewData($data));
+        $this->loadView('main/' . $view, $this->setViewData($data));
     }
 
 }

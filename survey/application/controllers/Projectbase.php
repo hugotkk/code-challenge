@@ -16,4 +16,11 @@ class Projectbase extends CI_Controller {
         return $data;
     }
 
+    public function loadView($view, $data) {
+        $viewData = $this->setViewData($data);
+        $this->load->view('common/header.php', $viewData);
+        $this->load->view('common/footer', $viewData);
+        $this->load->view($view, $viewData);
+    }
+
 }
