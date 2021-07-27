@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 if(ENVIRONMENT == 'development') {
     $route['test'] = 'test';
+    $route['migrate'] = 'migrate';
 }
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
