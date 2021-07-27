@@ -54,5 +54,13 @@ if(ENVIRONMENT == 'development') {
     $route['test'] = 'test';
     $route['migrate'] = 'migrate';
 }
+
+$route['report'] = 'report/index';
+$route['report/login'] = 'report/login';
+$route['report/logout'] = 'report/logout';
+$route['report/bar-graph'] = "report/bar_graph";
+$route['report/entries-per-color'] = "report/entries_per_color";
+$route['report/full-logs'] = "report/full_logs";
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
