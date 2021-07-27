@@ -117,6 +117,7 @@ class Survey extends CI_Model {
     }
 
     public function saveSubmit($data) {
+        $this->db->trans_start();
         $this->db->query("insert into survey (name, email, ip, user_agent) VALUES (?, ?, ?, ?)", [
             $data['name'],
             $data['email'],
@@ -130,6 +131,7 @@ class Survey extends CI_Model {
                 $color,
             ]);
         }
+        $this->db->trans_complete();
     }
 
 
