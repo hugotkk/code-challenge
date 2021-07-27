@@ -9,9 +9,12 @@
     - [X] CRSF Token / Recaptcha
     - [X] create account & user table
     - [X] login Protection for online report
-    - [ ] online report
+    - [X] online report (full logs)
+    - [X] random data for report
 
-26-07-2021 (2hr)
+- 28-07-2021
+- [ ] online report (entry per chosen color)
+- [ ] online report (entry per house of the day)
 - [ ] period report
 - [ ] email sending
 
