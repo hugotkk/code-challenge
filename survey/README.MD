@@ -1,7 +1,7 @@
 # TODO
 - 26-07-2021 (1hr)
-    - [X] project setup
-    - [X] form (Flow)
+    - [X] project setup (Docker, Framework)
+    - [X] form (flow - form validation, recaptcha, submit)
 
 - 27-07-2021 (4hr)
     - [X] survey schema & save
@@ -17,16 +17,19 @@
 - [ ] online report (entry per house of the day)
 - [ ] period report
 - [ ] email sending
+    - send email with queue (cron check & execute task per minute + use database to keep tracking the tasks)
+    - setup a cron, run at the mid night check if there are some survey not reported at all, then add a email task to the queue.
+    - check number of survey after submit. If reaching the batch limit, add a email task to the queue.
 
-# Nice to have
+# Enhacement
 - [ ] csrf token in login form
-- [ ] XSS protection
+- [ ] XSS protection for the input field; we can add htmlspecialchar to encode the post data
 - [ ] enable security cookie to prevent the session cookie (need to use SSL which this docker setup is not suitable)
 - [ ] move config to .env
 
 # Test case
 - [ ] Test field input
-- [ ] invalid color
+- [ ] invalid color (invalid color key)
 - [ ] required & non required
 - [ ] repeated email
 - [ ] Test form submission after limit
